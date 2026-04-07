@@ -1,0 +1,259 @@
+Navegación básica del sistema de archivos
+Objetivo:
+Familiarizarse con el sistema de archivos de Linux y comandos de navegación básicos.
+
+Comandos a utilizar:
+pwd: Muestra la ruta actual.
+ls: Lista los archivos y directorios.
+cd: Cambia de directorio.
+
+Instrucciones:
+Ver el directorio actual:
+
+pwd
+
+Listar archivos en el directorio actual:
+
+ls
+
+Moverte al directorio /home:
+
+cd /home
+
+Ir al directorio raíz (/):
+
+cd /
+
+Volver al directorio anterior:
+
+cd -
+
+Trabajando con archivos y directorios
+Objetivo:
+Crear, mover y eliminar archivos y directorios.
+
+Comandos a utilizar:
+touch: Crea un archivo vacío.
+mkdir: Crea un directorio.
+cp: Copia archivos o directorios.
+mv: Mueve o renombra archivos y directorios.
+rm: Elimina archivos o directorios.
+
+Instrucciones:
+Crear un archivo vacío llamado archivo.txt en tu directorio de inicio:
+
+touch ~/archivo.txt
+
+Crear un directorio llamado practica en tu directorio de inicio:
+
+mkdir ~/practica
+
+Mover el archivo archivo.txt al directorio practica:
+
+mv ~/archivo.txt ~/practica/
+
+Copiar el archivo archivo.txt dentro del mismo directorio, renombrándolo como archivo_backup.txt:
+
+cp ~/practica/archivo.txt ~/practica/archivo_backup.txt
+
+Eliminar el archivo archivo_backup.txt:
+
+rm ~/practica/archivo_backup.txt
+
+Eliminar el directorio practica junto con su contenido:
+
+rm -r ~/practica
+
+Manipulación de permisos y usuarios
+Objetivo:
+Entender cómo funcionan los permisos y cambiar los permisos de archivos.
+
+Comandos a utilizar:
+chmod: Cambia los permisos de los archivos.
+chown: Cambia el propietario de los archivos.
+ls -l: Muestra los detalles de archivos y permisos.
+Instrucciones:
+Listar los archivos con permisos en el directorio actual:
+
+ls -l
+Esto te mostrará los permisos en formato rwxrwxrwx. El primer grupo se refiere al propietario, el segundo al grupo y el tercero a otros.
+
+Crear un archivo llamado ejemplo.txt:
+
+touch ~/ejemplo.txt
+
+Cambiar los permisos para que solo el propietario tenga permisos de lectura y escritura:
+
+chmod 600 ~/ejemplo.txt
+
+Cambiar el propietario del archivo (reemplaza usuario por un nombre de usuario existente en el sistema):
+
+sudo chown usuario ~/ejemplo.txt
+
+Monitoreo de procesos
+Objetivo:
+Monitorear y gestionar procesos en el sistema.
+
+Comandos a utilizar:
+top o htop: Muestra los procesos en ejecución y el uso de recursos.
+ps: Muestra una lista de procesos.
+kill: Finaliza procesos.
+pgrep: Encuentra procesos por nombre.
+Instrucciones:
+Ejecutar top para monitorear procesos:
+
+top
+Aquí puedes ver el uso de CPU, memoria y una lista de procesos. Presiona q para salir.
+
+Buscar un proceso específico con ps:
+
+ps aux | grep bash
+Esto buscará todos los procesos relacionados con bash.
+
+Usar pgrep para encontrar el PID de un proceso (en este caso, el proceso ssh):
+
+pgrep ssh
+
+Matar un proceso usando su PID (reemplaza PID con el número real):
+
+kill PID
+
+Trabajar con el sistema de red
+Objetivo:
+Revisar la configuración de red y verificar la conectividad.
+
+Comandos a utilizar:
+ifconfig o ip a: Muestra la configuración de red.
+ping: Verifica la conectividad con otros servidores.
+netstat: Muestra las conexiones de red.
+Instrucciones:
+Ver la configuración de red (IP, interfaces, etc.):
+
+ip a
+
+Hacer ping a un servidor externo (por ejemplo, Google):
+
+ping google.com
+
+Presiona Ctrl+C para detener el ping.
+
+Revisar las conexiones activas:
+
+netstat -tuln
+
+Esto te mostrará una lista de puertos abiertos y conexiones activas.
+
+Archivos de log del sistema
+Objetivo:
+Ver y analizar los archivos de registro del sistema.
+
+Comandos a utilizar:
+tail: Muestra las últimas líneas de un archivo.
+less: Permite ver archivos grandes.
+journalctl: Muestra los registros del sistema.
+Instrucciones:
+Ver las últimas 10 líneas del archivo de log del sistema (syslog):
+
+tail /var/log/syslog
+
+Usar less para leer un archivo de log de forma interactiva:
+
+less /var/log/syslog
+
+Usa las teclas de flechas para navegar. Presiona q para salir.
+
+Ver los registros del sistema con journalctl:
+
+journalctl -xe
+
+Automatización con cron
+Objetivo:
+Programar tareas automáticas con cron.
+
+Comandos a utilizar:
+crontab -e: Edita la tabla de cron para programar tareas.
+Instrucciones:
+Abrir el archivo crontab:
+
+crontab -e
+
+Agregar una tarea para ejecutar un script cada día a las 2 AM:
+
+En el archivo crontab, añade lo siguiente:
+
+0 2 * * * /home/usuario/scripts/miscript.sh
+
+Esto ejecutará el script miscript.sh a las 2 AM todos los días.
+
+Guarda y cierra el archivo. cron ejecutará el script según el horario especificado.
+
+Gestión avanzada de archivos
+
+Comprimir un directorio con tar:
+
+tar -czf practica.tar.gz ~/practica
+
+Descomprimir el archivo .tar.gz:
+
+tar -xzf practica.tar.gz
+
+Crear un enlace simbólico de archivo.txt llamado enlace.txt:
+
+ln -s ~/ejemplo.txt ~/enlace.txt
+
+Buscar un archivo en todo el sistema:
+
+sudo find / -name ejemplo.txt
+
+Gestión de paquetes
+
+Instalar un paquete con apt-get (Ubuntu/Debian):
+
+sudo apt-get update
+sudo apt-get install nmap
+
+Eliminar un paquete:
+
+sudo apt-get remove nmap
+
+Verificar si un paquete está instalado:
+
+dpkg -l | grep nmap
+
+Gestión de usuarios y permisos
+
+Crear usuario
+
+sudo useradd -m usuario_nuevo
+sudo passwd usuario_nuevo
+
+Crear grupo
+
+sudo groupadd nuevo_grupo
+
+Agregar usuario al grupo
+
+sudo usermod -aG nuevo_grupo usuario_nuevo
+
+Backup y Restauración
+
+rsync -av ~/practica /mnt/backup/
+
+Ejercicio Final
+
+Crea un script llamado backup.sh que realice las siguientes tareas:
+
+Hacer un respaldo de los archivos de configuración en /etc.
+Comprimir los logs en /var/log y moverlos a un directorio de respaldo.
+Ejecutar una comprobación de integridad en los archivos importantes usando sha256sum.
+
+Resumen del laboratorio:
+
+Navegación básica: Uso de comandos como pwd, ls, y cd.
+Gestión de archivos y directorios: Crear, copiar, mover, y eliminar archivos y directorios.
+Permisos y usuarios: Cambiar permisos y propietarios con chmod y chown.
+Monitoreo de procesos: Uso de top, ps, y kill para gestionar procesos.
+Red y conectividad: Comprobación de la configuración de red y conectividad con ping, ip a y netstat.
+Archivos de log: Revisión de logs con tail, less y journalctl.
+Automatización con cron: Programación de tareas automáticas.
+Creacion y ejecutar script
