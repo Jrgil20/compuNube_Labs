@@ -1,12 +1,8 @@
-BACKUP_DIR="/mnt/backup"
-DATE=$(date +%Y%m%d_%H%M%S)
-BACKUP_PATH="$BACKUP_DIR/backup_$DATE"
+sudo cp -r /etc "/mnt/backup/etc_backup" 2>/dev/null
 
-sudo cp -r /etc "$BACKUP_PATH/etc_backup" 2>/dev/null
+sudo tar -czf "/mnt/backup/var_log.tar.gz" /var/log 2>/dev/null
 
-sudo tar -czf "$BACKUP_PATH/var_log_$DATE.tar.gz" /var/log 2>/dev/null
-
-INTEGRITY_FILE="$BACKUP_PATH/integrity_check_$DATE.sha256"
+INTEGRITY_FILE="/mnt/backup/integrity_check.sha256"
 
 IMPORTANT_FILES=(
     "/etc/passwd"
